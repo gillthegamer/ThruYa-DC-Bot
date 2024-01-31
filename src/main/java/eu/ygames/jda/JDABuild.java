@@ -1,5 +1,6 @@
 package eu.ygames.jda;
 
+import eu.ygames.commands.help;
 import eu.ygames.commands.removeRole;
 import eu.ygames.commands.setRole;
 import eu.ygames.core.commandHandler;
@@ -36,6 +37,7 @@ public class JDABuild {
     public static void addCommands()  {
 
         //commandHandler.commands.put("ping", new cmdPing());
+        commandHandler.commands.put("help", new help());
         commandHandler.commands.put("setRole",new setRole());
         commandHandler.commands.put("removeRole", new removeRole());
     }

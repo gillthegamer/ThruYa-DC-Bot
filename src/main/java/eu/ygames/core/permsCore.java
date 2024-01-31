@@ -2,6 +2,7 @@ package eu.ygames.core;
 
 import eu.ygames.utils.MSGS;
 import eu.ygames.utils.Settings;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -19,6 +20,8 @@ public class permsCore {
             return 2;
         } else if (Objects.requireNonNull(event.getGuild().getMember(event.getAuthor())).getRoles().contains(event.getGuild().getRoleById(Settings.getAdminNeor3flux()))) {
             return 3;
+        } else if ((Objects.requireNonNull(event.getGuild().getMember(event.getAuthor())).getPermissions().contains(Permission.ADMINISTRATOR))) {
+            return 4;
         } else {
             ErrorNoPermission(event);
             return 0;

@@ -50,8 +50,13 @@ public class setRole implements Command {
             event.getGuild().addRoleToMember((UserSnowflake) event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0), role).queue();
             Message msg = event.getChannel().sendMessageEmbeds(MSGS.green().setDescription(
                     ":small_red_triangle_down: " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
-                            " hat jetzt die " + rolename + " Rolle"
+                            " hat jetzt die " + role.getAsMention() + " Rolle"
             ).build()).complete();
+            Objects.requireNonNull(event.getGuild().getTextChannelById(Settings.getLOGCHANNEL())).sendMessageEmbeds(
+                    MSGS.yellow().setDescription(
+                            ":small_red_triangle_down: " + event.getMessage().getAuthor().getAsMention() + " hat " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
+                                    " die Rolle " + role.getAsMention() + " gegeben."
+                    ).build()).complete();
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -93,8 +98,8 @@ public class setRole implements Command {
 
     @Override
     public String help() {
-        return Settings.getPREFIX() + "setRole [User] [Roles] \n" +
-                "Setzt bei dem erwähnten User die Role \n" +
-                "Bsp: setRole @gillthegamer Helfende Elfen";
+        return Settings.getPREFIX() + "setRole [User] [Role] \n" +
+                "Setzt bei dem erw\u00E4hnten User die Role \n" +
+                "Bsp: " + Settings.getPREFIX() + "setRole @gillthegamer Helfende Elfen";
     }
 }

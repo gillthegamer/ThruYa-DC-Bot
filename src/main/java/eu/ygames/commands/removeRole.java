@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,8 +47,13 @@ public class removeRole implements Command {
             event.getGuild().removeRoleFromMember((UserSnowflake) event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0), role).queue();
             Message msg = event.getChannel().sendMessageEmbeds(MSGS.green().setDescription(
                     ":small_red_triangle_down: " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
-                            " hat jetzt die " + rolename + " Rolle nicht mehr"
+                            " hat jetzt die " + role.getAsMention() + " Rolle nicht mehr"
             ).build()).complete();
+            Objects.requireNonNull(event.getGuild().getTextChannelById(Settings.getLOGCHANNEL())).sendMessageEmbeds(
+                    MSGS.yellow().setDescription(
+                            ":small_red_triangle_down: " + event.getMessage().getAuthor().getAsMention() + " hat " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
+                                    " die Rolle " + role.getAsMention() + " entfernt."
+                    ).build()).complete();
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -69,17 +75,6 @@ public class removeRole implements Command {
 
 
 
-            /*
-            event.getGuild().getTextChannelsByName(Settings.getLOGCHANNEL(), true).get(0).sendMessageEmbeds(
-                    MSGS.red().setDescription(
-                            ":small_red_triangle_down: " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
-                                    " wurde gekickt von " + event.getMessage().getAuthor().getAsMention() + "(" + Objects.requireNonNull(event.getMessage().getMember()).getRoles().get(1).getName() + ").\n\n" +
-                                    "Grund: " + reason
-                    ).build()).complete();
-            */
-
-
-
 
     }
 
@@ -90,8 +85,8 @@ public class removeRole implements Command {
 
     @Override
     public String help() {
-        return Settings.getPREFIX() + "setRole [User] [Roles] \n" +
-                "Setzt bei dem erwähnten User die Role \n" +
-                "Bsp: setRole @gillthegamer Helfende Elfen";
+        return Settings.getPREFIX() + "removeRole [User] [Role] \n" +
+                "Entfernt bei dem erw\u00E4hnten User die Role \n" +
+                "Bsp: " + Settings.getPREFIX() + "removeRole @gillthegamer Helfende Elfen";
     }
 }

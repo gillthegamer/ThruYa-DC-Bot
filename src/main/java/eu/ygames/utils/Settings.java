@@ -11,6 +11,7 @@ import java.util.Properties;
  * Current Supported Settings:
  * @params TOKEN
  * @params PREFIX
+ * @params LOGCHANNEL
  * @params SETTINGSFILE
  * @params LANGUAGE
  * @params AdminHobbitbear
@@ -30,6 +31,7 @@ public class Settings {
     private static String SETTINGSFILE = "config.properties";
     private static String PREFIX;
     private static String LANGUAGE;
+    private static String LOGCHANNEL;
     private static String AdminHobbitbear;
     private static String[] RolsHobbitbear;
     private static String AdminHeyimt;
@@ -45,6 +47,7 @@ public class Settings {
             setTOKEN(prop.getProperty("TOKEN"));
             setPREFIX(prop.getOrDefault("PREFIX","-").toString());
             setLANGUAGE(prop.getOrDefault("LANGUAGE","DE").toString());
+            setLOGCHANNEL(prop.getOrDefault("LOGCHANNEL","1202371648699764786").toString());
             setAdminHobbitbear(prop.getOrDefault("AdminHobbitbear", "not set").toString());
             setRolsHobbitbear(prop.getOrDefault("RolsHobbitbear", "not set").toString().split(";"));
             setAdminHeyimt(prop.getOrDefault("AdminHeyimt", "not set").toString());
@@ -86,6 +89,14 @@ public class Settings {
 
     private static void setAdminHobbitbear(String adminHobbitbear) {
         AdminHobbitbear = adminHobbitbear;
+    }
+
+    public static String getLOGCHANNEL() {
+        return LOGCHANNEL;
+    }
+
+    private static void setLOGCHANNEL(String LOGCHANNEL) {
+        Settings.LOGCHANNEL = LOGCHANNEL;
     }
 
     public static String[] getRolsHobbitbear() {
