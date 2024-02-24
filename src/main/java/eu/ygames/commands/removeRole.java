@@ -24,58 +24,46 @@ public class removeRole implements Command {
     public void action(String[] args, MessageReceivedEvent event) throws IOException {
 
         event.getMessage().delete().complete();
+        int permsAdmin = permsCore.checkAdmin(event);
+        if (permsAdmin > 0) {
 
-        StringBuilder rolename = new StringBuilder("-none-");
-        int nameLength = Username.getUsernameArgsCount(event);
-        if (args.length >= nameLength) {
-            rolename = new StringBuilder();
-            for (int i = nameLength; i < args.length; i++) {
-                rolename.append(args[i]).append(" ");
+            StringBuilder rolename = new StringBuilder("-none-");
+            int nameLength = Username.getUsernameArgsCount(event);
+            if (args.length >= nameLength) {
+                rolename = new StringBuilder();
+                for (int i = nameLength; i < args.length; i++) {
+                    rolename.append(args[i]).append(" ");
+                }
+                rolename.deleteCharAt(rolename.length() - 1);
             }
-            rolename.deleteCharAt(rolename.length() - 1);
+
+            Role role;
+            try {
+                role = event.getGuild().getRolesByName(rolename.toString(), true).get(0);
+            } catch (Exception e) {
+                role = null;
+            }
+            int rolesCheck = permsCore.checkRols(role.getId(), event);
+            if (rolesCheck == permsAdmin|| rolesCheck == 4) {
+
+                event.getGuild().removeRoleFromMember((UserSnowflake) event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0), role).queue();
+                Message msg = event.getChannel().sendMessageEmbeds(MSGS.green().setDescription(
+                        ":small_red_triangle_down: " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
+                                " hat jetzt die " + role.getAsMention() + " Rolle nicht mehr"
+                ).build()).complete();
+                Objects.requireNonNull(event.getGuild().getTextChannelById(Settings.getLOGCHANNEL())).sendMessageEmbeds(
+                        MSGS.yellow().setDescription(
+                                ":small_red_triangle_down: " + event.getMessage().getAuthor().getAsMention() + " hat " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
+                                        " die Rolle " + role.getAsMention() + " entfernt."
+                        ).build()).complete();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        msg.delete().queue();
+                    }
+                }, 5000);
+            }
         }
-
-        Role role;
-        try {
-            role = event.getGuild().getRolesByName(rolename.toString(), true).get(0);
-        } catch (Exception e) {
-            role = null;
-        }
-
-
-        if (permsCore.checkRols(role.getId()) == permsCore.checkAdmin(event)) {
-            event.getGuild().removeRoleFromMember((UserSnowflake) event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0), role).queue();
-            Message msg = event.getChannel().sendMessageEmbeds(MSGS.green().setDescription(
-                    ":small_red_triangle_down: " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
-                            " hat jetzt die " + role.getAsMention() + " Rolle nicht mehr"
-            ).build()).complete();
-            Objects.requireNonNull(event.getGuild().getTextChannelById(Settings.getLOGCHANNEL())).sendMessageEmbeds(
-                    MSGS.yellow().setDescription(
-                            ":small_red_triangle_down: " + event.getMessage().getAuthor().getAsMention() + " hat " + event.getMessage().getMentions().getMentions(Message.MentionType.USER).get(0).getAsMention() +
-                                    " die Rolle " + role.getAsMention() + " entfernt."
-                    ).build()).complete();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    msg.delete().queue();
-                }
-            }, 5000);
-        } else {
-            Message msg = event.getChannel().sendMessageEmbeds(MSGS.red().setDescription(
-                    ":small_red_triangle_down: Du kannst diese Rolle nicht verwalten!"
-            ).build()).complete();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    msg.delete().queue();
-                }
-            }, 5000);
-        }
-
-
-
-
-
     }
 
     @Override

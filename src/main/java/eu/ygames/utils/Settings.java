@@ -20,6 +20,11 @@ import java.util.Properties;
  * @params RolsHeyimt
  * @params AdminNeor3flux
  * @params RolsNeor3flux
+ * @params RoleThruYa
+ * @params WELCOMECHANNEL
+ * @params RULECHANNEL
+ * @params RULECHECKEMOJI
+ * @params DEFAULTROLE
  *
  * @since 1.0
  * @author gillthegamer
@@ -33,11 +38,16 @@ public class Settings {
     private static String LANGUAGE;
     private static String LOGCHANNEL;
     private static String AdminHobbitbear;
-    private static String[] RolsHobbitbear;
+    private static String[] RoleHobbitbear;
     private static String AdminHeyimt;
-    private static String[] RolsHeyimt;
+    private static String[] RoleHeyimt;
     private static String AdminNeor3flux;
-    private static String[] RolsNeor3flux;
+    private static String[] RoleNeor3flux;
+    private static String[] RoleThruYa;
+    private static String WELCOMECHANNEL;
+    private static String RULECHANNEL;
+    private static String RULECHECKEMOJI;
+    private static String DEFAULTROLE;
 
     public Settings() {
         try {
@@ -45,19 +55,24 @@ public class Settings {
             Properties prop = new Properties();
             prop.load(inputStream);
             setTOKEN(prop.getProperty("TOKEN"));
-            setPREFIX(prop.getOrDefault("PREFIX","-").toString());
-            setLANGUAGE(prop.getOrDefault("LANGUAGE","DE").toString());
-            setLOGCHANNEL(prop.getOrDefault("LOGCHANNEL","1202371648699764786").toString());
+            setPREFIX(prop.getOrDefault("PREFIX", "-").toString());
+            setLANGUAGE(prop.getOrDefault("LANGUAGE", "DE").toString());
+            setLOGCHANNEL(prop.getOrDefault("LOGCHANNEL", "1202371648699764786").toString());
             setAdminHobbitbear(prop.getOrDefault("AdminHobbitbear", "not set").toString());
-            setRolsHobbitbear(prop.getOrDefault("RolsHobbitbear", "not set").toString().split(";"));
+            setRoleHobbitbear(prop.getOrDefault("RoleHobbitbear", "not set").toString().split(";"));
             setAdminHeyimt(prop.getOrDefault("AdminHeyimt", "not set").toString());
-            setRolsHeyimt(prop.getOrDefault("RolsHeyimt", "not set").toString().split(";"));
+            setRoleHeyimt(prop.getOrDefault("RoleHeyimt", "not set").toString().split(";"));
             setAdminNeor3flux(prop.getOrDefault("AdminNeor3flux", "not set").toString());
-            setRolsNeor3flux(prop.getOrDefault("RolsNeor3flux", "not set").toString().split(";"));
+            setRoleNeor3flux(prop.getOrDefault("RoleNeor3flux", "not set").toString().split(";"));
+            setRoleThruYa(prop.getOrDefault("RoleThruYa", "not set").toString().split(";"));
+            setWELCOMECHANNEL(prop.getOrDefault("WELCOMECHANNEL","1211028592688107630").toString());
+            setRULECHANNEL(prop.getOrDefault("RULECHANNEL","\uD83D\uDCDC-regeln").toString());
+            setRULECHECKEMOJI(prop.getOrDefault("RULECHECKEMOJI","U+2705").toString());
+            setDEFAULTROLE(prop.getOrDefault("RoleThruYa", "447304919272259585").toString().split(";")[0]);
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -69,12 +84,15 @@ public class Settings {
     private static void setTOKEN(String TOKEN) {
         Settings.TOKEN = TOKEN;
     }
+
     public static String getPREFIX() {
         return PREFIX;
     }
+
     private static void setPREFIX(String PREFIX) {
         Settings.PREFIX = PREFIX;
     }
+
     public static String getLANGUAGE() {
         return LANGUAGE;
     }
@@ -99,12 +117,12 @@ public class Settings {
         Settings.LOGCHANNEL = LOGCHANNEL;
     }
 
-    public static String[] getRolsHobbitbear() {
-        return RolsHobbitbear;
+    public static String[] getRoleHobbitbear() {
+        return RoleHobbitbear;
     }
 
-    private static void setRolsHobbitbear(String[] rolsHobbitbear) {
-        RolsHobbitbear = rolsHobbitbear;
+    private static void setRoleHobbitbear(String[] roleHobbitbear) {
+        RoleHobbitbear = roleHobbitbear;
     }
 
     public static String getAdminHeyimt() {
@@ -115,12 +133,12 @@ public class Settings {
         AdminHeyimt = adminHeyimt;
     }
 
-    public static String[] getRolsHeyimt() {
-        return RolsHeyimt;
+    public static String[] getRoleHeyimt() {
+        return RoleHeyimt;
     }
 
-    private static void setRolsHeyimt(String[] rolsHeyimt) {
-        RolsHeyimt = rolsHeyimt;
+    private static void setRoleHeyimt(String[] roleHeyimt) {
+        RoleHeyimt = roleHeyimt;
     }
 
     public static String getAdminNeor3flux() {
@@ -131,11 +149,51 @@ public class Settings {
         AdminNeor3flux = adminNeor3flux;
     }
 
-    public static String[] getRolsNeor3flux() {
-        return RolsNeor3flux;
+    public static String[] getRoleNeor3flux() {
+        return RoleNeor3flux;
     }
 
-    private static void setRolsNeor3flux(String[] rolsNeor3flux) {
-        RolsNeor3flux = rolsNeor3flux;
+    private static void setRoleNeor3flux(String[] roleNeor3flux) {
+        RoleNeor3flux = roleNeor3flux;
+    }
+
+    public static String[] getRoleThruYa() {
+        return RoleThruYa;
+    }
+
+    private static void setRoleThruYa(String[] roleThruYa) {
+        RoleThruYa = roleThruYa;
+    }
+
+    public static String getWELCOMECHANNEL() {
+        return WELCOMECHANNEL;
+    }
+
+    private static void setWELCOMECHANNEL(String WELCOMECHANNEL) {
+        Settings.WELCOMECHANNEL = WELCOMECHANNEL;
+    }
+
+    public static String getRULECHANNEL() {
+        return RULECHANNEL;
+    }
+
+    private static void setRULECHANNEL(String RULECHANNEL) {
+        Settings.RULECHANNEL = RULECHANNEL;
+    }
+
+    public static String getRULECHECKEMOJI() {
+        return RULECHECKEMOJI;
+    }
+
+    private static void setRULECHECKEMOJI(String RULECHECKEMOJI) {
+        Settings.RULECHECKEMOJI = RULECHECKEMOJI;
+    }
+
+    public static String getDEFAULTROLE() {
+        return DEFAULTROLE;
+    }
+
+    private static void setDEFAULTROLE(String DEFAULTROLE) {
+        Settings.DEFAULTROLE = DEFAULTROLE;
     }
 }

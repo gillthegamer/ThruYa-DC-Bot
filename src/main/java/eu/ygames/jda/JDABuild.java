@@ -4,7 +4,7 @@ import eu.ygames.commands.help;
 import eu.ygames.commands.removeRole;
 import eu.ygames.commands.setRole;
 import eu.ygames.core.commandHandler;
-import eu.ygames.listeners.commandListener;
+import eu.ygames.listeners.*;
 import eu.ygames.utils.Settings;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -44,6 +44,8 @@ public class JDABuild {
 
     public static void addListeners(JDABuilder builder) {
         builder.addEventListeners(new commandListener());
+        builder.addEventListeners(new joinListener());
+        builder.addEventListeners(new reactionListener());
 
     }
 

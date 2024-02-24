@@ -24,17 +24,20 @@ public class permsCore {
             return 4;
         } else {
             ErrorNoPermission(event);
-            return 0;
+            return -1;
         }
     }
-    public static int checkRols(String RoleID) {
-        if (Arrays.asList(Settings.getRolsHobbitbear()).contains(RoleID)) {
+    public static int checkRols(String RoleID, MessageReceivedEvent event) {
+        if (Arrays.asList(Settings.getRoleThruYa()).contains(RoleID)) {
+            return 4;
+        } else if (Arrays.asList(Settings.getRoleHobbitbear()).contains(RoleID)) {
             return 1;
-        } else if (Arrays.asList(Settings.getRolsHeyimt()).contains(RoleID)) {
+        } else if (Arrays.asList(Settings.getRoleHeyimt()).contains(RoleID)) {
             return 2;
-        } else if (Arrays.asList(Settings.getRolsNeor3flux()).contains(RoleID)) {
+        } else if (Arrays.asList(Settings.getRoleNeor3flux()).contains(RoleID)) {
             return 3;
         } else {
+            ErrorNotYourRoles(event);
             return 0;
         }
     }
@@ -50,6 +53,17 @@ public class permsCore {
                 msg.delete().queue();
             }
         }, 10000);
+    }
+    private static void ErrorNotYourRoles(MessageReceivedEvent event) {
+        Message msg = event.getChannel().sendMessageEmbeds(MSGS.red().setDescription(
+                ":small_red_triangle_down: Du kannst diese Rolle nicht verwalten!"
+        ).build()).complete();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                msg.delete().queue();
+            }
+        }, 5000);
     }
 
 }
