@@ -7,7 +7,6 @@ import java.util.Properties;
 /**
  * This Class Stores all important Settings which can be changed globally all at once.
  * Using the properties file.
- *
  * Current Supported Settings:
  * @params TOKEN
  * @params PREFIX
