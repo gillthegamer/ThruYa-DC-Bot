@@ -7,14 +7,14 @@ Discord Bot based on https://github.com/discord-jda/JDA. Customized Discord Bot 
 - Java 17
 # How it works
 
-Install Java on your System an execute the java application. The default config is the config.properties and is in the same directory as the java application. it needs to have the `TOKEN` an the `PREFIX`
+Install Java on your System an execute the java application. The default config is the config.properties and is in the same directory as the java application. it needs to have the `TOKEN` an the `PREFIX`\
 eg. (Default config)\
 `java -jar ThruYa-DC-Bot-1.0.jar`\
-If you want to have your own config create a .properties file an at the `-s` Parameter.
+If you want to have your own config create a .properties file an at the `-s` Parameter.\
 eg.\
 `java -jar ThruYa-DC-Bot-1.0.jar -s config.properties`
 # How to create the config file
-Put in the a config.properties the Bot TOKEN an the prefix
+Put in the a config.properties the Bot TOKEN an the prefix\
 eg.\
 ```
 TOKEN={Your Bot Token}
@@ -28,7 +28,7 @@ RULECHANNEL ={rule channel ID}
 RULECHECKEMOJI ={rule check Emoji}
 ```
 ### How to get the Channel ID
-Activate the Developer Mode on your Discord Client an right click on the channel there you can copy the channel ID. The Emoji must be on in Unicode Hex format.
+Activate the Developer Mode on your Discord Client an right click on the channel there you can copy the channel ID. The Emoji must be on in Unicode Hex format.\
 eg.\
 `U+2705` ✅
 # Devs
