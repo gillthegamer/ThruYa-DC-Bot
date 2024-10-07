@@ -7,7 +7,6 @@ import java.util.Properties;
 /**
  * This Class Stores all important Settings which can be changed globally all at once.
  * Using the properties file.
- *
  * Current Supported Settings:
  * @params TOKEN
  * @params PREFIX
@@ -33,7 +32,6 @@ import java.util.Properties;
 public class Settings {
 
     private static String TOKEN;
-    private static String SETTINGSFILE = "config.properties";
     private static String PREFIX;
     private static String LANGUAGE;
     private static String LOGCHANNEL;
@@ -49,7 +47,7 @@ public class Settings {
     private static String RULECHECKEMOJI;
     private static String DEFAULTROLE;
 
-    public Settings() {
+    public Settings(String SETTINGSFILE) {
         try {
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(SETTINGSFILE);
             Properties prop = new Properties();
