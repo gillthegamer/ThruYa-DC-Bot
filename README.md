@@ -15,7 +15,7 @@ eg.\
 `java -jar ThruYa-DC-Bot-1.0.jar -s config.properties`
 # How to create the config file
 Put in the a config.properties the Bot TOKEN an the prefix\
-eg.\
+eg.
 ```
 TOKEN={Your Bot Token}
 PREFIX={Your preferd Prefix}
@@ -29,7 +29,6 @@ RULECHECKEMOJI ={rule check Emoji}
 ```
 ### How to get the Channel ID
 Activate the Developer Mode on your Discord Client an right click on the channel there you can copy the channel ID. The Emoji must be on in Unicode Hex format.\
-eg.\
-`U+2705` ✅
+eg. `U+2705` ✅
 # Devs
 [gillthegamer](https://github.com/gillthegamer) 
